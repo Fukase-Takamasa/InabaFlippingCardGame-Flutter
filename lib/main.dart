@@ -26,13 +26,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,25 +34,35 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      body: GridView.count(
+        crossAxisCount: 6, //1行に表示する数
+        crossAxisSpacing: 10, //縦スペース
+        mainAxisSpacing: 10, //横スペース
+        shrinkWrap: true,
+        children: List.generate(50, (index) {
+          return Container(
+            padding: const EdgeInsets.all(8.0),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.green,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+
+          );
+        }),
+
+      )
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
