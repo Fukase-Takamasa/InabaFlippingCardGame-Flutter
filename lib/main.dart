@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisCount: 6, //1行に表示する数
           crossAxisSpacing: 10, //縦スペース
           mainAxisSpacing: 10, //横スペース
-          childAspectRatio: 0.7,
+          childAspectRatio: 0.7, //セルの縦横比
           shrinkWrap: true,
           children: List.generate(30, (index) { //セル数
             return Container(
