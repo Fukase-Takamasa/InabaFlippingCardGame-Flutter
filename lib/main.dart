@@ -31,6 +31,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
+    var imageList = [
+      photoItem("ina1"), photoItem("ina2"), photoItem("ina3"),
+      photoItem("ina4"), photoItem("ina5"), photoItem("ina6"),
+      photoItem("ina7"), photoItem("ina8"), photoItem("ina9"),
+      photoItem("ina10"), photoItem("ina11"), photoItem("ina12"),
+      photoItem("ina13"), photoItem("ina14"), photoItem("ina15"),
+      photoItem("ina1"), photoItem("ina2"), photoItem("ina3"),
+      photoItem("ina4"), photoItem("ina5"), photoItem("ina6"),
+      photoItem("ina7"), photoItem("ina8"), photoItem("ina9"),
+      photoItem("ina10"), photoItem("ina11"), photoItem("ina12"),
+      photoItem("ina13"), photoItem("ina14"), photoItem("ina15")
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -45,21 +58,29 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisSpacing: 10, //横スペース
           childAspectRatio: 0.7, //セルの縦横比
           shrinkWrap: true,
-          children: List.generate(30, (index) { //セル数
-            return Container(
-//            padding: const EdgeInsets.only(top: 20.0),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
 
-            );
-          }),
+          children: imageList,
 
+//          children: List.generate(30, (index) { //セル数
+//            return Container(
+////            padding: const EdgeInsets.only(top: 20.0),
+//              child: imageList,
+//              alignment: Alignment.center,
+//              decoration: BoxDecoration(
+//                color: Colors.white,
+//                borderRadius: BorderRadius.circular(10),
+//              ),
+//            );
+//          }),
         ),
       )
+    );
+  }
 
+  Widget photoItem(String image) {
+    var assetsImage = "images/" + image + ".jpg";
+    return Container(
+      child: Image.asset(assetsImage, fit: BoxFit.cover)
     );
   }
 }
