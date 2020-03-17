@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
           childAspectRatio: 0.7, //セルの縦横比
           shrinkWrap: true,
 
-          children: imageList,
+          children: imageList
 
 //          children: List.generate(30, (index) { //セル数
 //            return Container(
@@ -80,7 +80,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget photoItem(String image) {
     var assetsImage = "images/" + image + ".jpg";
     return Container(
-      child: Image.asset(assetsImage, fit: BoxFit.cover)
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(4.0),
+        child: Image.asset(assetsImage, fit: BoxFit.cover)
+      )
     );
   }
 }
