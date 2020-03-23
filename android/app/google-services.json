@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "291756064202",
+    "firebase_url": "https://inaba-flipping-card-game.firebaseio.com",
+    "project_id": "inaba-flipping-card-game",
+    "storage_bucket": "inaba-flipping-card-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291756064202:android:2e4ce6d3eecb038bfca333",
+        "android_client_info": {
+          "package_name": "com.fukase.inaba_flipping_card_game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291756064202-v4ctkup5ocs22097qsrgq6for6gje6ju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIz_m5E0-LE7TNnAdYhjAzcBblmd6ZKFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291756064202-v4ctkup5ocs22097qsrgq6for6gje6ju.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "291756064202-qu2ukuga5llqnq8lbjrccdi02sl4dcdg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fukase.inabaFlippingCardGame"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
