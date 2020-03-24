@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'cardData.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,6 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
+    List<CardData> inabaCards = <CardData>[];
+
     var imageList = [
       photoItem("ina1"), photoItem("ina2"), photoItem("ina3"),
       photoItem("ina4"), photoItem("ina5"), photoItem("ina6"),
@@ -60,19 +63,19 @@ class _MyHomePageState extends State<MyHomePage> {
           childAspectRatio: 0.7, //セルの縦横比
           shrinkWrap: true,
 
-          children: imageList
+//          children: imageList
 
-//          children: List.generate(30, (index) { //セル数
-//            return Container(
-////            padding: const EdgeInsets.only(top: 20.0),
-//              child: imageList,
-//              alignment: Alignment.center,
-//              decoration: BoxDecoration(
-//                color: Colors.white,
-//                borderRadius: BorderRadius.circular(10),
-//              ),
-//            );
-//          }),
+          children: List.generate(30, (index) { //セル数
+            return Container(
+            padding: const EdgeInsets.all(2.0),
+              child: imageList[index],
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(4),
+              ),
+            );
+          }),
         ),
       )
     );
