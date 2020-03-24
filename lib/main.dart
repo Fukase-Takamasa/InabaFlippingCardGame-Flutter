@@ -33,7 +33,38 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    List<CardData> inabaCards = <CardData>[];
+    List<CardData> inabaCards = <CardData>[
+      CardData(imageName: "ina1", isOpened: "true", isMatched: "false"),
+      CardData(imageName: "ina2", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina3", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina4", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina5", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina6", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina7", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina8", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina9", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina10", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina11", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina12", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina13", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina14", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina15", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina1", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina2", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina3", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina4", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina5", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina6", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina7", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina8", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina9", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina10", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina11", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina12", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina13", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina14", isOpened: "false", isMatched: "false"),
+      CardData(imageName: "ina15", isOpened: "true", isMatched: "false")
+    ];
 
     var imageList = [
       photoItem("ina1"), photoItem("ina2"), photoItem("ina3"),
