@@ -68,76 +68,111 @@ class _MyHomePageState extends State<MyHomePage> {
       CardData(imageName: "ina15", isOpened: "true", isMatched: "false")
     ];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(
-        padding: EdgeInsets.only(
-          top: deviceSize.height * 0.18, bottom: deviceSize.height * 0.2,
-          left: deviceSize.width * 0.04, right: deviceSize.width * 0.04),
-        child: GridView.builder(
-          itemCount: inabaCards.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 6,
-            crossAxisSpacing: 10, //縦スペース
-            mainAxisSpacing: 10, //横スペース
-            childAspectRatio: 0.7, //セルの縦横比
-          ),
-          itemBuilder: (context, index) {
-            if (inabaCards[index].isOpened == "true") {
-              print("itemBuilderの中です isOpened trueの方");
-              return GestureDetector(
-                onTap: () {
-                  if (inabaCards[index].isOpened == "false") {
-                    inabaCards[index].isOpened = "true";
-                    setState(() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance
+          .collection("currentGameTableData")
+          .snapshots(),
+      builder: (BuildContext context,
+          AsyncSnapshot<QuerySnapshot> snapshot) {
+//        if (snapshot.hasError) {
+//          return Text("Error: ${snapshot.error}");
+//        }
+//        switch (snapshot.connectionState) {
+//          case ConnectionState.waiting: return Text("Loading...");
+//          default:
+//            return GridView(
+//              children: snapshot.data.documents.map((DocumentSnapshot document) {
+//                return Container(
+//                  child: photoItem(document["imageName"]),
+//                );
+//              }).toList(),
+//            );
+//        }
+        if (!snapshot.hasData) return const Text('Loading...');
 
-                    });
-                  }else if (inabaCards[index].isOpened == "true") {
-                    inabaCards[index].isOpened = "false";
-                  }
-                  print(inabaCards[index].imageName);
-                  print(inabaCards[index].isOpened);
-                  print(inabaCards[index].isMatched);
-                },
-
-                child: photoItem(inabaCards[index].imageName),
-//                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
-//                  alignment: Alignment.center,
-//                  decoration: BoxDecoration(
-//                    color: Colors.white,
-//                    borderRadius: BorderRadius.circular(4),
-//                  )
-              );
-              print("あ");
-            }else {
-              print("itemBuilderの中です isOpened falseの方");
-              return GestureDetector(
-                onTap: () {
-                  if (inabaCards[index].isOpened == "false") {
-                    inabaCards[index].isOpened = "true";
-                  }else if (inabaCards[index].isOpened == "true") {
-                    inabaCards[index].isOpened = "false";
-                  }
-                  print(inabaCards[index].imageName);
-                  print(inabaCards[index].isOpened);
-                  print(inabaCards[index].isMatched);
-                },
-//                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
-                child: photoItem("CardBackImageRed"),
-//                  alignment: Alignment.center,
-//                  decoration: BoxDecoration(
-//                    color: Colors.white,
-//                    borderRadius: BorderRadius.circular(4),
-//                  )
-              );
-//                return photoItem("CardBackImageRed");
-            }
-          },
-        ),
-      ),
+//        return GridView(
+//              children: snapshot.data.documents.map((DocumentSnapshot document) {
+//                return Container(
+//                  child: photoItem(document["imageName"]),
+//                );
+//              }).toList(),
+//            );
+      return Center(
+        child: Text("中身: ${snapshot.data.documents[0]["imageName"]}"),
+      );
+      },
     );
+
+//    return Scaffold(
+//      appBar: AppBar(
+//        title: Text(widget.title),
+//      ),
+//      body: Container(
+//        padding: EdgeInsets.only(
+//          top: deviceSize.height * 0.18, bottom: deviceSize.height * 0.2,
+//          left: deviceSize.width * 0.04, right: deviceSize.width * 0.04),
+//        child: GridView.builder(
+//          itemCount: inabaCards.length,
+//          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//            crossAxisCount: 6,
+//            crossAxisSpacing: 10, //縦スペース
+//            mainAxisSpacing: 10, //横スペース
+//            childAspectRatio: 0.7, //セルの縦横比
+//          ),
+//          itemBuilder: (context, index) {
+//            if (inabaCards[index].isOpened == "true") {
+//              print("itemBuilderの中です isOpened trueの方");
+//              return GestureDetector(
+//                onTap: () {
+//                  if (inabaCards[index].isOpened == "false") {
+//                    inabaCards[index].isOpened = "true";
+//                    setState(() {
+//
+//                    });
+//                  }else if (inabaCards[index].isOpened == "true") {
+//                    inabaCards[index].isOpened = "false";
+//                  }
+//                  print(inabaCards[index].imageName);
+//                  print(inabaCards[index].isOpened);
+//                  print(inabaCards[index].isMatched);
+//                },
+//
+//                child: photoItem(inabaCards[index].imageName),
+////                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
+////                  alignment: Alignment.center,
+////                  decoration: BoxDecoration(
+////                    color: Colors.white,
+////                    borderRadius: BorderRadius.circular(4),
+////                  )
+//              );
+//              print("あ");
+//            }else {
+//              print("itemBuilderの中です isOpened falseの方");
+//              return GestureDetector(
+//                onTap: () {
+//                  if (inabaCards[index].isOpened == "false") {
+//                    inabaCards[index].isOpened = "true";
+//                  }else if (inabaCards[index].isOpened == "true") {
+//                    inabaCards[index].isOpened = "false";
+//                  }
+//                  print(inabaCards[index].imageName);
+//                  print(inabaCards[index].isOpened);
+//                  print(inabaCards[index].isMatched);
+//                },
+////                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
+//                child: photoItem("CardBackImageRed"),
+////                  alignment: Alignment.center,
+////                  decoration: BoxDecoration(
+////                    color: Colors.white,
+////                    borderRadius: BorderRadius.circular(4),
+////                  )
+//              );
+////                return photoItem("CardBackImageRed");
+//            }
+//          },
+//        ),
+//      ),
+//    );
   }
 
   Widget photoItem(String image) {
