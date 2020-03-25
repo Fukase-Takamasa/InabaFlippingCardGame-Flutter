@@ -85,19 +85,55 @@ class _MyHomePageState extends State<MyHomePage> {
             childAspectRatio: 0.7, //セルの縦横比
           ),
           itemBuilder: (context, index) {
-              if (inabaCards[index].isOpened == "true") {
-                return Container(
+            if (inabaCards[index].isOpened == "true") {
+              print("itemBuilderの中です isOpened trueの方");
+              return GestureDetector(
+                onTap: () {
+                  if (inabaCards[index].isOpened == "false") {
+                    inabaCards[index].isOpened = "true";
+                    setState(() {
+
+                    });
+                  }else if (inabaCards[index].isOpened == "true") {
+                    inabaCards[index].isOpened = "false";
+                  }
+                  print(inabaCards[index].imageName);
+                  print(inabaCards[index].isOpened);
+                  print(inabaCards[index].isMatched);
+                },
+
+                child: photoItem(inabaCards[index].imageName),
 //                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
-                  child: photoItem(inabaCards[index].imageName),
 //                  alignment: Alignment.center,
 //                  decoration: BoxDecoration(
 //                    color: Colors.white,
 //                    borderRadius: BorderRadius.circular(4),
 //                  )
-                );
-              }else {
-                return photoItem("CardBackImageRed");
-              }
+              );
+              print("あ");
+            }else {
+              print("itemBuilderの中です isOpened falseの方");
+              return GestureDetector(
+                onTap: () {
+                  if (inabaCards[index].isOpened == "false") {
+                    inabaCards[index].isOpened = "true";
+                  }else if (inabaCards[index].isOpened == "true") {
+                    inabaCards[index].isOpened = "false";
+                  }
+                  print(inabaCards[index].imageName);
+                  print(inabaCards[index].isOpened);
+                  print(inabaCards[index].isMatched);
+                },
+//                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
+                child: photoItem("CardBackImageRed"),
+//                  alignment: Alignment.center,
+//                  decoration: BoxDecoration(
+//                    color: Colors.white,
+//                    borderRadius: BorderRadius.circular(4),
+//                  )
+              );
+//                return photoItem("CardBackImageRed");
+            }
           },
         ),
       ),

@@ -6,7 +6,7 @@ class CardData {
     this.isMatched
   });
 
-  final String imageName;
-  final String isOpened;
-  final String isMatched;
+  String imageName;
+  String isOpened;
+  String isMatched;
 }
