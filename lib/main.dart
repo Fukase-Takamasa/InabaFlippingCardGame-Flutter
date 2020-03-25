@@ -68,39 +68,23 @@ class _MyHomePageState extends State<MyHomePage> {
       CardData(imageName: "ina15", isOpened: "true", isMatched: "false")
     ];
 
-    var imageList = [
-      photoItem("ina1"), photoItem("ina2"), photoItem("ina3"),
-      photoItem("ina4"), photoItem("ina5"), photoItem("ina6"),
-      photoItem("ina7"), photoItem("ina8"), photoItem("ina9"),
-      photoItem("ina10"), photoItem("ina11"), photoItem("ina12"),
-      photoItem("ina13"), photoItem("ina14"), photoItem("ina15"),
-      photoItem("ina1"), photoItem("ina2"), photoItem("ina3"),
-      photoItem("ina4"), photoItem("ina5"), photoItem("ina6"),
-      photoItem("ina7"), photoItem("ina8"), photoItem("ina9"),
-      photoItem("ina10"), photoItem("ina11"), photoItem("ina12"),
-      photoItem("ina13"), photoItem("ina14"), photoItem("ina15")
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: Container(
-//        width: deviceSize.width * 0.9,
-//        height: deviceSize.height * 0.7,
         padding: EdgeInsets.only(
           top: deviceSize.height * 0.18, bottom: deviceSize.height * 0.2,
           left: deviceSize.width * 0.04, right: deviceSize.width * 0.04),
         child: GridView.builder(
-
+          itemCount: inabaCards.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 6,
             crossAxisSpacing: 10, //縦スペース
             mainAxisSpacing: 10, //横スペース
             childAspectRatio: 0.7, //セルの縦横比
           ),
-          itemBuilder: (BuildContext context, int index) {
-            if (index < inabaCards.length) {
+          itemBuilder: (context, index) {
               if (inabaCards[index].isOpened == "true") {
                 return Container(
 //                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
@@ -114,16 +98,9 @@ class _MyHomePageState extends State<MyHomePage> {
               }else {
                 return photoItem("CardBackImageRed");
               }
-            }else {
-              return null;
-            }
           },
-//        ),
-        )
+        ),
       ),
-//      Padding(
-//        padding: EdgeInsets.only(left: 30, top: 100, right: 30, bottom: 100),
-
     );
   }
 
