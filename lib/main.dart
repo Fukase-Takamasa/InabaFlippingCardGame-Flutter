@@ -37,6 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
         .of(context)
         .size;
 
+    var flipCount = 1;
+    var flippedCard = [0, 0];
+
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -66,7 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemBuilder: (context, index) {
 
                     if (snapshot.data.documents[index]["isOpened"] == true) {
-                      print("itemBuilderの中です isOpened trueの方");
                       return GestureDetector(
                         onTap: () {
                           if (snapshot.data.documents[index]["isOpened"] == false) {
@@ -105,43 +107,79 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                       print("あ");
                     }else {
-                      print("itemBuilderの中です isOpened falseの方");
-                      return GestureDetector(
-                        onTap: () {
-                          if (snapshot.data.documents[index]["isOpened"] == false) {
+                      if (index % 2 == 0) {
+                        return GestureDetector(
+                            onTap: () {
+                              if (snapshot.data.documents[index]["isOpened"] == false) {
 //                            setState(() {
-                              //DBのisOpenedをtrueに更新する
-                            Firestore.instance
-                                .collection("currentGameTableData")
-                                .document("cardData${index + 1}")
-                                .setData({
-                              "isOpened": true
-                            }, merge: true);
+                                //DBのisOpenedをtrueに更新する
+                                Firestore.instance
+                                    .collection("currentGameTableData")
+                                    .document("cardData${index + 1}")
+                                    .setData({
+                                  "isOpened": true
+                                }, merge: true);
 //                            });
-                          }else if (snapshot.data.documents[index]["isOpened"] == true) {
-                            //DBのisOpenedをfalseに更新する
-                            Firestore.instance
-                                .collection("currentGameTableData")
-                                .document("cardData${index + 1}")
-                                .setData({
-                              "isOpened": false
-                            }, merge: true);
-                          }
-                          print(snapshot.data.documents[index]["imageName"]);
-                          print(snapshot.data.documents[index]["isOpened"]);
-                          print(snapshot.data.documents[index]["isMatched"]);
-                        },
+                              }else if (snapshot.data.documents[index]["isOpened"] == true) {
+                                //DBのisOpenedをfalseに更新する
+                                Firestore.instance
+                                    .collection("currentGameTableData")
+                                    .document("cardData${index + 1}")
+                                    .setData({
+                                  "isOpened": false
+                                }, merge: true);
+                              }
+                              print(snapshot.data.documents[index]["imageName"]);
+                              print(snapshot.data.documents[index]["isOpened"]);
+                              print(snapshot.data.documents[index]["isMatched"]);
+                            },
 //                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
-                        child: photoItem("CardBackImageRed") != null ?
-                        photoItem("CardBackImageRed")
-                          : Text("Loading...")
+                            child: photoItem("CardBackImageRed") != null ?
+                            photoItem("CardBackImageRed")
+                                : Text("Loading...")
 //                  alignment: Alignment.center,
 //                  decoration: BoxDecoration(
 //                    color: Colors.white,
 //                    borderRadius: BorderRadius.circular(4),
 //                  )
-                      );
-//                return photoItem("CardBackImageRed");
+                        );
+                      }else {
+                        return GestureDetector(
+                            onTap: () {
+                              if (snapshot.data.documents[index]["isOpened"] == false) {
+//                            setState(() {
+                                //DBのisOpenedをtrueに更新する
+                                Firestore.instance
+                                    .collection("currentGameTableData")
+                                    .document("cardData${index + 1}")
+                                    .setData({
+                                  "isOpened": true
+                                }, merge: true);
+//                            });
+                              }else if (snapshot.data.documents[index]["isOpened"] == true) {
+                                //DBのisOpenedをfalseに更新する
+                                Firestore.instance
+                                    .collection("currentGameTableData")
+                                    .document("cardData${index + 1}")
+                                    .setData({
+                                  "isOpened": false
+                                }, merge: true);
+                              }
+                              print(snapshot.data.documents[index]["imageName"]);
+                              print(snapshot.data.documents[index]["isOpened"]);
+                              print(snapshot.data.documents[index]["isMatched"]);
+                            },
+//                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
+                            child: photoItem("CardBackImageBlue") != null ?
+                            photoItem("CardBackImageBlue")
+                                : Text("Loading...")
+//                  alignment: Alignment.center,
+//                  decoration: BoxDecoration(
+//                    color: Colors.white,
+//                    borderRadius: BorderRadius.circular(4),
+//                  )
+                        );
+                      }
                     }
                   }
               );
