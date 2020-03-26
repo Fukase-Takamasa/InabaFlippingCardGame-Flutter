@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
         body: StreamBuilder<QuerySnapshot>(
             stream: Firestore.instance
                 .collection("currentGameTableData")
+                .orderBy("id")
                 .snapshots(),
             builder: (BuildContext context,
                 AsyncSnapshot<QuerySnapshot> snapshot) {
