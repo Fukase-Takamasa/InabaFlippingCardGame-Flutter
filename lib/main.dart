@@ -68,14 +68,18 @@ class _MyHomePageState extends State<MyHomePage> {
       CardData(imageName: "ina15", isOpened: "true", isMatched: "false")
     ];
 
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance
+    return Scaffold(
+      appBar: AppBar(
+      title: Text(widget.title),
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance
           .collection("currentGameTableData")
           .snapshots(),
-      builder: (BuildContext context,
-          AsyncSnapshot<QuerySnapshot> snapshot) {
-
-        if (!snapshot.hasData) return const Text('Loading...');
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return const Text('Loading...');
+          }
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 6,
@@ -94,7 +98,8 @@ class _MyHomePageState extends State<MyHomePage> {
               }
             }
           );
-      }
+        }
+      )
     );
 
 //    return Scaffold(
