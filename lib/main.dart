@@ -74,33 +74,27 @@ class _MyHomePageState extends State<MyHomePage> {
           .snapshots(),
       builder: (BuildContext context,
           AsyncSnapshot<QuerySnapshot> snapshot) {
-//        if (snapshot.hasError) {
-//          return Text("Error: ${snapshot.error}");
-//        }
-//        switch (snapshot.connectionState) {
-//          case ConnectionState.waiting: return Text("Loading...");
-//          default:
-//            return GridView(
-//              children: snapshot.data.documents.map((DocumentSnapshot document) {
-//                return Container(
-//                  child: photoItem(document["imageName"]),
-//                );
-//              }).toList(),
-//            );
-//        }
-        if (!snapshot.hasData) return const Text('Loading...');
 
-//        return GridView(
-//              children: snapshot.data.documents.map((DocumentSnapshot document) {
-//                return Container(
-//                  child: photoItem(document["imageName"]),
-//                );
-//              }).toList(),
-//            );
-      return Center(
-        child: Text("中身: ${snapshot.data.documents[0]["imageName"]}"),
-      );
-      },
+        if (!snapshot.hasData) return const Text('Loading...');
+          return GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 6,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 0.7,
+            ),
+            itemCount: 30,
+            padding: EdgeInsets.only(top: deviceSize.height * 0.18, bottom: deviceSize.height * 0.2,
+          left: deviceSize.width * 0.04, right: deviceSize.width * 0.04),
+            itemBuilder: (context, index) {
+              if (index < 30) {
+                return photoItem(snapshot.data.documents[index]["imageName"]) != null? photoItem(snapshot.data.documents[index]["imageName"]) : Text("Loading...");
+              }else {
+                return null;
+              }
+            }
+          );
+      }
     );
 
 //    return Scaffold(
