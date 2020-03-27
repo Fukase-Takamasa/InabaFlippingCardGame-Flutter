@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'cardData.dart';
@@ -68,24 +69,43 @@ class _MyHomePageState extends State<MyHomePage> {
 
                     return GestureDetector(
                       onTap: (){
-
+                        if (snapshot.data.documents[index]["isOpened"] == false) {
+                            //DBのisOpenedをtrueに更新する
+                          Firestore.instance
+                              .collection("currentGameTableData")
+                              .document("cardData${index + 1}")
+                              .setData({
+                            "isOpened": true
+                          }, merge: true);
+                        }else if (snapshot.data.documents[index]["isOpened"] == true) {
+                            //DBのisOpenedをfalseに更新する
+                          Firestore.instance
+                              .collection("currentGameTableData")
+                              .document("cardData${index + 1}")
+                              .setData({
+                            "isOpened": false
+                          }, merge: true);
+                        }
                       },
 
                       child: ((){
+                        print("childの中");
                         if (snapshot.data.documents[index]["isOpened"]) {
-                          photoItem(snapshot.data.documents[index]["imageName"]) != null ?
+                          print("childの中1");
+                          return photoItem(snapshot.data.documents[index]["imageName"]) != null ?
                           photoItem(snapshot.data.documents[index]["imageName"])
-                              : Text("Loading...");
+                                : Text("Loading...");
                         }else {
                           if (index % 2 == 0) {
-                            photoItem("CardBackImageRed") != null ?
+                            print("childの中2");
+                            return photoItem("CardBackImageRed") != null ?
                             photoItem("CardBackImageRed")
                                 : Text("Loading...");
                           }else {
-                            photoItem("CardBackImageBlue") != null ?
+                            print("childの中3");
+                            return photoItem("CardBackImageBlue") != null ?
                             photoItem("CardBackImageBlue")
                                 : Text("Loading...");
-
                           }
                         }
                       }()),
