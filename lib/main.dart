@@ -33,9 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Size deviceSize = MediaQuery
-        .of(context)
-        .size;
+    Size deviceSize = MediaQuery.of(context).size;
 
     var flipCount = 1;
     var flippedCard = [0, 0];
@@ -68,119 +66,164 @@ class _MyHomePageState extends State<MyHomePage> {
                       right: deviceSize.width * 0.04),
                   itemBuilder: (context, index) {
 
-                    if (snapshot.data.documents[index]["isOpened"] == true) {
-                      return GestureDetector(
-                        onTap: () {
-                          if (snapshot.data.documents[index]["isOpened"] == false) {
-//                            setState(() {
-                              //DBのisOpenedをtrueに更新する
-                            Firestore.instance
-                                .collection("currentGameTableData")
-                                .document("cardData${index + 1}")
-                                .setData({
-                              "isOpened": true
-                            }, merge: true);
-//                            });
-                          }else if (snapshot.data.documents[index]["isOpened"] == true) {
-                              //DBのisOpenedをfalseに更新する
-                            Firestore.instance
-                                .collection("currentGameTableData")
-                                .document("cardData${index + 1}")
-                                .setData({
-                              "isOpened": false
-                            }, merge: true);
-                          }
-                          print(snapshot.data.documents[index]["imageName"]);
-                          print(snapshot.data.documents[index]["isOpened"]);
-                          print(snapshot.data.documents[index]["isMatched"]);
-                        },
+                    return GestureDetector(
+                      onTap: (){
 
-                        child: photoItem(snapshot.data.documents[index]["imageName"]) != null ?
-                        photoItem(snapshot.data.documents[index]["imageName"])
-                            : Text("Loading...")
-//                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
-//                  alignment: Alignment.center,
-//                  decoration: BoxDecoration(
-//                    color: Colors.white,
-//                    borderRadius: BorderRadius.circular(4),
-//                  )
-                      );
-                      print("あ");
-                    }else {
-                      if (index % 2 == 0) {
-                        return GestureDetector(
-                            onTap: () {
-                              if (snapshot.data.documents[index]["isOpened"] == false) {
-//                            setState(() {
-                                //DBのisOpenedをtrueに更新する
-                                Firestore.instance
-                                    .collection("currentGameTableData")
-                                    .document("cardData${index + 1}")
-                                    .setData({
-                                  "isOpened": true
-                                }, merge: true);
-//                            });
-                              }else if (snapshot.data.documents[index]["isOpened"] == true) {
-                                //DBのisOpenedをfalseに更新する
-                                Firestore.instance
-                                    .collection("currentGameTableData")
-                                    .document("cardData${index + 1}")
-                                    .setData({
-                                  "isOpened": false
-                                }, merge: true);
-                              }
-                              print(snapshot.data.documents[index]["imageName"]);
-                              print(snapshot.data.documents[index]["isOpened"]);
-                              print(snapshot.data.documents[index]["isMatched"]);
-                            },
-//                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
-                            child: photoItem("CardBackImageRed") != null ?
+                      },
+
+                      child: ((){
+                        if (snapshot.data.documents[index]["isOpened"]) {
+                          photoItem(snapshot.data.documents[index]["imageName"]) != null ?
+                          photoItem(snapshot.data.documents[index]["imageName"])
+                              : Text("Loading...");
+                        }else {
+                          if (index % 2 == 0) {
+                            photoItem("CardBackImageRed") != null ?
                             photoItem("CardBackImageRed")
-                                : Text("Loading...")
-//                  alignment: Alignment.center,
-//                  decoration: BoxDecoration(
-//                    color: Colors.white,
-//                    borderRadius: BorderRadius.circular(4),
-//                  )
-                        );
-                      }else {
-                        return GestureDetector(
-                            onTap: () {
-                              if (snapshot.data.documents[index]["isOpened"] == false) {
-//                            setState(() {
-                                //DBのisOpenedをtrueに更新する
-                                Firestore.instance
-                                    .collection("currentGameTableData")
-                                    .document("cardData${index + 1}")
-                                    .setData({
-                                  "isOpened": true
-                                }, merge: true);
-//                            });
-                              }else if (snapshot.data.documents[index]["isOpened"] == true) {
-                                //DBのisOpenedをfalseに更新する
-                                Firestore.instance
-                                    .collection("currentGameTableData")
-                                    .document("cardData${index + 1}")
-                                    .setData({
-                                  "isOpened": false
-                                }, merge: true);
-                              }
-                              print(snapshot.data.documents[index]["imageName"]);
-                              print(snapshot.data.documents[index]["isOpened"]);
-                              print(snapshot.data.documents[index]["isMatched"]);
-                            },
-//                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
-                            child: photoItem("CardBackImageBlue") != null ?
+                                : Text("Loading...");
+                          }else {
+                            photoItem("CardBackImageBlue") != null ?
                             photoItem("CardBackImageBlue")
-                                : Text("Loading...")
-//                  alignment: Alignment.center,
-//                  decoration: BoxDecoration(
-//                    color: Colors.white,
-//                    borderRadius: BorderRadius.circular(4),
-//                  )
-                        );
-                      }
-                    }
+                                : Text("Loading...");
+
+                          }
+                        }
+                      }()),
+                    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                    if (snapshot.data.documents[index]["isOpened"] == true) {
+//                      return GestureDetector(
+//                        onTap: () {
+//                          if (snapshot.data.documents[index]["isOpened"] == false) {
+////                            setState(() {
+//                              //DBのisOpenedをtrueに更新する
+//                            Firestore.instance
+//                                .collection("currentGameTableData")
+//                                .document("cardData${index + 1}")
+//                                .setData({
+//                              "isOpened": true
+//                            }, merge: true);
+////                            });
+//                          }else if (snapshot.data.documents[index]["isOpened"] == true) {
+//                              //DBのisOpenedをfalseに更新する
+//                            Firestore.instance
+//                                .collection("currentGameTableData")
+//                                .document("cardData${index + 1}")
+//                                .setData({
+//                              "isOpened": false
+//                            }, merge: true);
+//                          }
+//                          print(snapshot.data.documents[index]["imageName"]);
+//                          print(snapshot.data.documents[index]["isOpened"]);
+//                          print(snapshot.data.documents[index]["isMatched"]);
+//                        },
+//
+//                        child: photoItem(snapshot.data.documents[index]["imageName"]) != null ?
+//                        photoItem(snapshot.data.documents[index]["imageName"])
+//                            : Text("Loading...")
+////                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
+////                  alignment: Alignment.center,
+////                  decoration: BoxDecoration(
+////                    color: Colors.white,
+////                    borderRadius: BorderRadius.circular(4),
+////                  )
+//                      );
+//                      print("あ");
+//                    }else {
+//                      if (index % 2 == 0) {
+//                        return GestureDetector(
+//                            onTap: () {
+//                              if (snapshot.data.documents[index]["isOpened"] == false) {
+////                            setState(() {
+//                                //DBのisOpenedをtrueに更新する
+//                                Firestore.instance
+//                                    .collection("currentGameTableData")
+//                                    .document("cardData${index + 1}")
+//                                    .setData({
+//                                  "isOpened": true
+//                                }, merge: true);
+////                            });
+//                              }else if (snapshot.data.documents[index]["isOpened"] == true) {
+//                                //DBのisOpenedをfalseに更新する
+//                                Firestore.instance
+//                                    .collection("currentGameTableData")
+//                                    .document("cardData${index + 1}")
+//                                    .setData({
+//                                  "isOpened": false
+//                                }, merge: true);
+//                              }
+//                              print(snapshot.data.documents[index]["imageName"]);
+//                              print(snapshot.data.documents[index]["isOpened"]);
+//                              print(snapshot.data.documents[index]["isMatched"]);
+//                            },
+////                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
+//                            child: photoItem("CardBackImageRed") != null ?
+//                            photoItem("CardBackImageRed")
+//                                : Text("Loading...")
+////                  alignment: Alignment.center,
+////                  decoration: BoxDecoration(
+////                    color: Colors.white,
+////                    borderRadius: BorderRadius.circular(4),
+////                  )
+//                        );
+//                      }else {
+//                        return GestureDetector(
+//                            onTap: () {
+//                              if (snapshot.data.documents[index]["isOpened"] == false) {
+////                            setState(() {
+//                                //DBのisOpenedをtrueに更新する
+//                                Firestore.instance
+//                                    .collection("currentGameTableData")
+//                                    .document("cardData${index + 1}")
+//                                    .setData({
+//                                  "isOpened": true
+//                                }, merge: true);
+////                            });
+//                              }else if (snapshot.data.documents[index]["isOpened"] == true) {
+//                                //DBのisOpenedをfalseに更新する
+//                                Firestore.instance
+//                                    .collection("currentGameTableData")
+//                                    .document("cardData${index + 1}")
+//                                    .setData({
+//                                  "isOpened": false
+//                                }, merge: true);
+//                              }
+//                              print(snapshot.data.documents[index]["imageName"]);
+//                              print(snapshot.data.documents[index]["isOpened"]);
+//                              print(snapshot.data.documents[index]["isMatched"]);
+//                            },
+////                  padding: const EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
+//                            child: photoItem("CardBackImageBlue") != null ?
+//                            photoItem("CardBackImageBlue")
+//                                : Text("Loading...")
+////                  alignment: Alignment.center,
+////                  decoration: BoxDecoration(
+////                    color: Colors.white,
+////                    borderRadius: BorderRadius.circular(4),
+////                  )
+//                        );
+//                      }
+//                    }
                   }
               );
             }
