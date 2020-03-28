@@ -1,9 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:io';
-//import 'cardData.dart';
 
 void main() => runApp(MyApp());
 
@@ -69,16 +66,35 @@ class _MyHomePageState extends State<MyHomePage> {
                       right: deviceSize.width * 0.04),
                   itemBuilder: (context, index) {
                     return GestureDetector(
+                      //セルに表示する画像の設定
+                      child: ((){  //←　child:の中でif文を使うために ((){ 処理内容 }())　で囲って関数化している
+                        if (snapshot.data.documents[index]["isMatched"] || snapshot.data.documents[index]["isOpened"]) {
+                          return photoItem(snapshot.data.documents[index]["imageName"]) != null ?
+                          photoItem(snapshot.data.documents[index]["imageName"])
+                              : Text("Loading...");
+                        }else {
+                          if (index % 2 == 0) {
+                            return photoItem("CardBackImageRed") != null ?
+                            photoItem("CardBackImageRed")
+                                : Text("Loading...");
+                          }else {
+                            return photoItem("CardBackImageBlue") != null ?
+                            photoItem("CardBackImageBlue")
+                                : Text("Loading...");
+                          }
+                        }
+                      }()),  //←　child:の中でif文を使うために ((){ 処理内容 }())　で囲って関数化している
+                      //セルタップ時のアクションの設定
                       onTap: (){
                         if (tapCardsEnabled) {
-                          print("//カードタップ有効です");
-                          print("//まずカードが閉じているか確認");
+                          print("カードタップ有効です");
+                          print("まずカードが閉じているか確認");
                           if (snapshot.data.documents[index]["isOpened"] == false) {
+                            print("閉じていたのでめくります");
                             if (flipCount == 1) {
-                              print("//フリップが1回目の場合 -> カードをめくる処理と、indexの記録");
+                              print("フリップが1回目 -> カードをめくる処理と、indexの記録");
                               flipCount = 2;
                               flippedCard[0] = index;
-                              //DBのisOpenedをtrueに更新する
                               Firestore.instance
                                   .collection("currentGameTableData")
                                   .document("cardData${index + 1}")
@@ -86,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 "isOpened": true
                               }, merge: true);
                             }else {
-                              print("//フリップが2回目の場合 -> 2枚がマッチしてるかジャッジ");
+                              print("//フリップが2回目 -> 2枚がマッチしてるかジャッジ");
                               flippedCard[1] = index;
                               if (snapshot.data.documents[flippedCard[0]]["imageName"] ==
                                   snapshot.data.documents[flippedCard[1]]["imageName"]) {
@@ -119,8 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     .setData({
                                   "isOpened": true,
                                 }, merge: true);
-                                print("//遅延処理予約　2秒後に実行される");
-
+                                print("//遅延処理予約　1.5秒後に実行される");
                                 Future.delayed(Duration(milliseconds: 1500), () {
                                   print("//遅延処理実行開始 カードを両方とも閉じる");
                                   Firestore.instance
@@ -142,6 +157,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 });
                               }
                             }
+                          }else {
+                            print("開いているカードは触れません");
                           }
                           print("現在のindex: $index");
                           print("flippedCard: $flippedCard");
@@ -149,24 +166,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           print("カートタップが無効です");
                         }
                     },
-
-                      child: ((){
-                        if (snapshot.data.documents[index]["isMatched"] || snapshot.data.documents[index]["isOpened"]) {
-                          return photoItem(snapshot.data.documents[index]["imageName"]) != null ?
-                          photoItem(snapshot.data.documents[index]["imageName"])
-                                : Text("Loading...");
-                        }else {
-                          if (index % 2 == 0) {
-                            return photoItem("CardBackImageRed") != null ?
-                            photoItem("CardBackImageRed")
-                                : Text("Loading...");
-                          }else {
-                            return photoItem("CardBackImageBlue") != null ?
-                            photoItem("CardBackImageBlue")
-                                : Text("Loading...");
-                          }
-                        }
-                      }()),
                     );
                   }
               );
@@ -175,6 +174,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+
+  //指定の画像名でwidgetを生成し、returnする関数  →　photoItem("ina1")の様に使う
   Widget photoItem(String image) {
     var assetsImage = "images/" + image + ".jpg";
     return Container(
