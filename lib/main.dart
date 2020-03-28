@@ -119,24 +119,27 @@ class _MyHomePageState extends State<MyHomePage> {
                                     .setData({
                                   "isOpened": true,
                                 }, merge: true);
-                                print("//マッチしていないので2秒後にカードを両方とも閉じる");
-                                sleep(Duration(seconds: 2));
-                                Firestore.instance
-                                    .collection("currentGameTableData")
-                                    .document("cardData${flippedCard[0] + 1}")
-                                    .setData({
-                                  "isOpened": false,
-                                }, merge: true);
-                                Firestore.instance
-                                    .collection("currentGameTableData")
-                                    .document("cardData${flippedCard[1] + 1}")
-                                    .setData({
-                                  "isOpened": false,
-                                }, merge: true);
-                                print("//最後にカウントとindexとカードタップ可否を元に戻す");
-                                flipCount = 1;
-                                flippedCard = [0, 0];
-                                tapCardsEnabled = true;
+                                print("//遅延処理予約　2秒後に実行される");
+
+                                Future.delayed(Duration(seconds: 2), () {
+                                  print("//遅延処理実行開始 カードを両方とも閉じる");
+                                  Firestore.instance
+                                      .collection("currentGameTableData")
+                                      .document("cardData${flippedCard[0] + 1}")
+                                      .setData({
+                                    "isOpened": false,
+                                  }, merge: true);
+                                  Firestore.instance
+                                      .collection("currentGameTableData")
+                                      .document("cardData${flippedCard[1] + 1}")
+                                      .setData({
+                                    "isOpened": false,
+                                  }, merge: true);
+                                  print("//最後にカウントとindexとカードタップ可否を元に戻す");
+                                  flipCount = 1;
+                                  flippedCard = [0, 0];
+                                  tapCardsEnabled = true;
+                                });
                               }
                             }
                           }
