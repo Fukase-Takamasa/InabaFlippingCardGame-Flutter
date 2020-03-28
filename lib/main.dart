@@ -121,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 }, merge: true);
                                 print("//遅延処理予約　2秒後に実行される");
 
-                                Future.delayed(Duration(seconds: 2), () {
+                                Future.delayed(Duration(milliseconds: 1500), () {
                                   print("//遅延処理実行開始 カードを両方とも閉じる");
                                   Firestore.instance
                                       .collection("currentGameTableData")
