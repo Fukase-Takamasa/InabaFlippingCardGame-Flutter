@@ -83,12 +83,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                 : Text("Loading...");
                           }
                         }
-                      }()),  //←　child:の中でif文を使うために ((){ 処理内容 }())　で囲って関数化している
+                      }()),
                       //セルタップ時のアクションの設定
                       onTap: (){
                         if (tapCardsEnabled) {
                           print("カードタップ有効です");
-                          print("まずカードが閉じているか確認");
                           if (snapshot.data.documents[index]["isOpened"] == false) {
                             print("閉じていたのでめくります");
                             if (flipCount == 1) {
