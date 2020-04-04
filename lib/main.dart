@@ -44,7 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: StreamBuilder<QuerySnapshot>(
             stream: Firestore.instance
-                .collection("currentGameTableData")
+                .collection("rooms")
+                .document("room1")
+                .collection("cardData")
                 .orderBy("id")
                 .snapshots(),
             builder: (BuildContext context,
@@ -95,7 +97,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               flipCount = 2;
                               flippedCard[0] = index;
                               Firestore.instance
-                                  .collection("currentGameTableData")
+                                  .collection("rooms")
+                                  .document("room1")
+                                  .collection("cardData")
                                   .document("cardData${index + 1}")
                                   .setData({
                                 "isOpened": true
@@ -107,14 +111,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                   snapshot.data.documents[flippedCard[1]]["imageName"]) {
                                 print("//マッチした！両方のisOpened / isMatchedをtrueにする");
                                 Firestore.instance
-                                    .collection("currentGameTableData")
+                                    .collection("rooms")
+                                    .document("room1")
+                                    .collection("cardData")
                                     .document("cardData${flippedCard[0] + 1}")
                                     .setData({
                                   "isOpened": true,
                                   "isMatched": true
                                 }, merge: true);
                                 Firestore.instance
-                                    .collection("currentGameTableData")
+                                    .collection("rooms")
+                                    .document("room1")
+                                    .collection("cardData")
                                     .document("cardData${flippedCard[1] + 1}")
                                     .setData({
                                   "isOpened": true,
@@ -129,7 +137,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                 print("//また、2秒後にカードを閉じるまでの間にカードを触れなくする");
                                 tapCardsEnabled = false;
                                 Firestore.instance
-                                    .collection("currentGameTableData")
+                                    .collection("rooms")
+                                    .document("room1")
+                                    .collection("cardData")
                                     .document("cardData${index + 1}")
                                     .setData({
                                   "isOpened": true,
@@ -138,13 +148,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Future.delayed(Duration(milliseconds: 1500), () {
                                   print("//遅延処理実行開始 カードを両方とも閉じる");
                                   Firestore.instance
-                                      .collection("currentGameTableData")
+                                      .collection("rooms")
+                                      .document("room1")
+                                      .collection("cardData")
                                       .document("cardData${flippedCard[0] + 1}")
                                       .setData({
                                     "isOpened": false,
                                   }, merge: true);
                                   Firestore.instance
-                                      .collection("currentGameTableData")
+                                      .collection("rooms")
+                                      .document("room1")
+                                      .collection("cardData")
                                       .document("cardData${flippedCard[1] + 1}")
                                       .setData({
                                     "isOpened": false,
