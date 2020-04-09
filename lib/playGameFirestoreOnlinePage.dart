@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'playGameFirestoreOnlinePage.dart';
 
 class PlayGameFirestoreOnlinePage extends StatefulWidget {
   PlayGameFirestoreOnlinePage({Key key, this.title}) : super(key: key);
@@ -29,7 +28,7 @@ class _PlayGameFirestoreOnlinePageState extends State<PlayGameFirestoreOnlinePag
         body: StreamBuilder<QuerySnapshot>(
             stream: Firestore.instance
                 .collection("rooms")
-                .document("room1")
+                .document("7153904E-F915-47B3-B9B8-25DFF479B60ERoom")
                 .collection("cardData")
                 .orderBy("id")
                 .snapshots(),
