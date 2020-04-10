@@ -182,17 +182,4 @@ class _PlayGameFirestoreOnlinePageState extends State<PlayGameFirestoreOnlinePag
     );
   }
 
-//  @override
-//  void initState() {
-//    super.initState();
-//  }
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      body: Center(
-//        child: Text("Lobby"),
-//      ),
-//    );
-//  }
 }
