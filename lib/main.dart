@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'playGameFirestoreOnlinePage.dart';
+import 'playGameFightWithYourSelfPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(title: 'ロビー«Flutter»'),
       routes: {
         '/playGameFirestoreOnline': (BuildContext context) =>  PlayGameFirestoreOnlinePage(title: 'FirestoreOnline'),
+        '/PlayGameFightWithYourSelf': (BuildContext context) => PlayGameFightWithYourSelfPage(title: 'FightWithYourSelf'),
       },
     );
   }
@@ -46,11 +48,25 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title)
       ),
       body: Center(
-        child: RaisedButton(
-          child: Text("オンラインで遊ぶ"),
-          onPressed: () =>  //MyAppのところでroutesに記述したIdentifierを下に遷移
-            Navigator.of(context).pushNamed("/playGameFirestoreOnline"),
-        ),
+        child: Row(
+          children: <Widget>[
+            RaisedButton(
+              child: Text("自分との戦い"),
+              onPressed: () =>  //MyAppのところでroutesに記述したIdentifierを元に遷移
+                  Navigator.of(context).pushNamed("/PlayGameFightWithYourSelf"),
+            ),
+            RaisedButton(
+              child: Text("オンラインで遊ぶ"),
+              onPressed: () =>  //MyAppのところでroutesに記述したIdentifierを元に遷移
+                  Navigator.of(context).pushNamed("/playGameFirestoreOnline"),
+            ),
+          ],
+        )
+//        RaisedButton(
+//          child: Text("オンラインで遊ぶ"),
+//          onPressed: () =>  //MyAppのところでroutesに記述したIdentifierを下に遷移
+//            Navigator.of(context).pushNamed("/playGameFirestoreOnline"),
+//        ),
       ),
     );
   }
