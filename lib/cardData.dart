@@ -7,6 +7,6 @@ class CardData {
   });
 
   String imageName;
-  String isOpened;
-  String isMatched;
+  bool isOpened;
+  bool isMatched;
 }

@@ -28,10 +28,12 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
     }
     randomNumList.shuffle();
     for (var random in randomNumList) {
-      inabaCards += [CardData(imageName: "ina$random", isOpened: "false", isMatched: "false")];
+      inabaCards += [CardData(imageName: "ina$random", isOpened: false, isMatched: false)];
     }
 
-    print("inabaCards: $inabaCards");
+    for (var card in inabaCards) {
+      print("inabaCardsの中身: ${card.imageName} ${card.isOpened} ${card.isMatched}");
+    }
 
     return Scaffold(
         appBar: AppBar(
