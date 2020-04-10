@@ -81,7 +81,7 @@ class _PlayGameFirestoreOnlinePageState extends State<PlayGameFirestoreOnlinePag
                               flippedCard[0] = index;
                               Firestore.instance
                                   .collection("rooms")
-                                  .document("room1")
+                                  .document("7153904E-F915-47B3-B9B8-25DFF479B60ERoom")
                                   .collection("cardData")
                                   .document("cardData${index + 1}")
                                   .setData({
@@ -95,7 +95,7 @@ class _PlayGameFirestoreOnlinePageState extends State<PlayGameFirestoreOnlinePag
                                 print("//マッチした！両方のisOpened / isMatchedをtrueにする");
                                 Firestore.instance
                                     .collection("rooms")
-                                    .document("room1")
+                                    .document("7153904E-F915-47B3-B9B8-25DFF479B60ERoom")
                                     .collection("cardData")
                                     .document("cardData${flippedCard[0] + 1}")
                                     .setData({
@@ -104,7 +104,7 @@ class _PlayGameFirestoreOnlinePageState extends State<PlayGameFirestoreOnlinePag
                                 }, merge: true);
                                 Firestore.instance
                                     .collection("rooms")
-                                    .document("room1")
+                                    .document("7153904E-F915-47B3-B9B8-25DFF479B60ERoom")
                                     .collection("cardData")
                                     .document("cardData${flippedCard[1] + 1}")
                                     .setData({
@@ -121,7 +121,7 @@ class _PlayGameFirestoreOnlinePageState extends State<PlayGameFirestoreOnlinePag
                                 tapCardsEnabled = false;
                                 Firestore.instance
                                     .collection("rooms")
-                                    .document("room1")
+                                    .document("7153904E-F915-47B3-B9B8-25DFF479B60ERoom")
                                     .collection("cardData")
                                     .document("cardData${index + 1}")
                                     .setData({
@@ -132,7 +132,7 @@ class _PlayGameFirestoreOnlinePageState extends State<PlayGameFirestoreOnlinePag
                                   print("//遅延処理実行開始 カードを両方とも閉じる");
                                   Firestore.instance
                                       .collection("rooms")
-                                      .document("room1")
+                                      .document("7153904E-F915-47B3-B9B8-25DFF479B60ERoom")
                                       .collection("cardData")
                                       .document("cardData${flippedCard[0] + 1}")
                                       .setData({
@@ -140,7 +140,7 @@ class _PlayGameFirestoreOnlinePageState extends State<PlayGameFirestoreOnlinePag
                                   }, merge: true);
                                   Firestore.instance
                                       .collection("rooms")
-                                      .document("room1")
+                                      .document("7153904E-F915-47B3-B9B8-25DFF479B60ERoom")
                                       .collection("cardData")
                                       .document("cardData${flippedCard[1] + 1}")
                                       .setData({
