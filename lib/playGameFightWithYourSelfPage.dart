@@ -27,6 +27,12 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
       randomNumList += [(i > 15 ? i - 15 : i)];
     }
     randomNumList.shuffle();
+    print("カンニングシート${randomNumList.sublist(0, 6)}");
+    print("カンニングシート${randomNumList.sublist(6, 12)}");
+    print("カンニングシート${randomNumList.sublist(12, 18)}");
+    print("カンニングシート${randomNumList.sublist(18, 24)}");
+    print("カンニングシート${randomNumList.sublist(24, 30)}");
+
     for (var random in randomNumList) {
       inabaCards += [CardData(imageName: "ina$random", isOpened: false, isMatched: false)];
     }
@@ -62,11 +68,6 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
                 //セルに表示する画像の設定
                 child: ((){  //←　child:の中でif文を使うために ((){ 処理内容 }())　で囲って関数化している
                   if (inabaCards[index].isMatched || inabaCards[index].isOpened) {
-                    if (photoItem(inabaCards[index].imageName) == null) {
-                      print("nullでした");
-                    }else {
-                      print("カードはぞんざいします");
-                    }
                     return photoItem(inabaCards[index].imageName) != null ? photoItem(inabaCards[index].imageName) : Text("ImageNotFound");
                   }else {
                     if (index % 2 == 0) {
