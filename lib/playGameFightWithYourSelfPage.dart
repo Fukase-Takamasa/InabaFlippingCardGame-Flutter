@@ -42,7 +42,9 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
+          backgroundColor: Colors.amber[100],
         ),
+        backgroundColor: Colors.amber,
         body: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 6,

@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'InabaFlippingCardGame',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.green,
+        primaryColor: Colors.lightGreen[100],
+        scaffoldBackgroundColor: Colors.green[800],
       ),
       home: MyHomePage(title: 'ロビー«Flutter»'),
       routes: {
