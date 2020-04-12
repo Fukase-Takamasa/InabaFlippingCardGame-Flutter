@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title)
       ),
       body: Container(
-        padding: EdgeInsets.all(30),
+        padding: EdgeInsets.all(20),
         child:
       Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text(
                       "ひとりで遊ぶ",
                       style: TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white,
+                        fontSize: 23, fontWeight: FontWeight.bold, color: Colors.white,
                       ),
                     ),
                   ),
@@ -76,7 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child:  Container(
-                    padding: EdgeInsets.all(10), width: 320, height: 2, color: Colors.white,
+                    padding: EdgeInsets.all(10),
+                    width: deviceScreenSize.width * 0.83, height: 2, color: Colors.white,
                   ),
                 ),
               ],
@@ -84,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             Container(
               padding: EdgeInsets.all(10),
-              width: deviceScreenSize.width * 0.7, height: 70,
+              width: deviceScreenSize.width * 0.75, height: 70,
               child: RaisedButton(
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               padding: EdgeInsets.all(10),
-              width: deviceScreenSize.width * 0.7, height: 70,
+              width: deviceScreenSize.width * 0.75, height: 70,
               child: RaisedButton(
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -130,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text(
                       "オンラインで遊ぶ",
                       style: TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white,
+                        fontSize: 23, fontWeight: FontWeight.bold, color: Colors.white,
                       ),
                     ),
                   ),
@@ -142,7 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child:  Container(
-                    padding: EdgeInsets.all(10), width: 320, height: 2, color: Colors.white,
+                    padding: EdgeInsets.all(10),
+                    width: deviceScreenSize.width * 0.83, height: 2, color: Colors.white,
                   ),
                 ),
               ],
@@ -150,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               child: Container(
                 width: deviceScreenSize.width * 0.85,
-                  padding: EdgeInsets.all(12),
+                  padding: EdgeInsets.only(top: 12, bottom: 12),
                   child: Container(
                     decoration: BoxDecoration(
 //                      border: Border.all(color: Colors.black26, width: 2),
