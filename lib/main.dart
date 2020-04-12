@@ -42,6 +42,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final Size deviceScreenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -54,28 +57,34 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.all(10),
-              width: 400,
-              height: 2,
-              color: Colors.white,
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              width: 280,
-              height: 70,
-              child: RaisedButton(
-                child: Text("オンラインで遊ぶ"),
-                onPressed: () =>  //MyAppのところでroutesに記述したIdentifierを元に遷移
-                Navigator.of(context).pushNamed("/playGameFirestoreOnline"),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+              child: Text(
+                "ひとりで遊ぶ",
+                  style: TextStyle(
+                    fontSize: 24, fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
               ),
             ),
             Container(
+              padding: EdgeInsets.all(10), width: 400, height: 2, color: Colors.white,
+            ),
+            Container(
               padding: EdgeInsets.all(10),
-              width: 280,
-              height: 70,
+              width: 280, height: 70,
               child: RaisedButton(
-                child: Text("自分との戦い"),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget> [
+                      Icon(Icons.person_outline),
+                      Text(
+                        "自分との戦い",
+                        style: TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                      ),
+                    ]
+                ),
                 onPressed: () =>  //MyAppのところでroutesに記述したIdentifierを元に遷移
                 Navigator.of(context).pushNamed("/PlayGameFightWithYourSelf"),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
@@ -83,24 +92,73 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               padding: EdgeInsets.all(10),
-              width: 400,
-              height: 2,
-              color: Colors.white,
+              width: 280, height: 70,
+              child: RaisedButton(
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget> [
+                    Icon(Icons.desktop_mac),
+                    Text(
+                        "コンピュータと対戦",
+                        style: TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                        )
+                    ),
+                  ]
+                ),
+                onPressed: () =>  //MyAppのところでroutesに記述したIdentifierを元に遷移
+                Navigator.of(context).pushNamed("/PlayGameFightWithYourSelf"),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+              ),
+            ),
+            Container(
+              child: Text(
+                "オンラインで遊ぶ",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(10), width: 400, height: 2, color: Colors.white,
             ),
             Expanded(
-                child: ListView(
-                  padding: EdgeInsets.all(10),
-                children: List.generate(5, (index) {
-                  return Card(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                    child: Container(
-                      margin: EdgeInsets.all(20),
+              child: Container(
+                  padding: EdgeInsets.all(12),
+                  child: Container(
+                    decoration: BoxDecoration(
+//                      border: Border.all(color: Colors.black26, width: 2),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
-                      child: Text("ルーム$index"),
                     ),
-                  );
-                }
-                )
+                    child: ListView(
+//                      padding: EdgeInsets.all(10),
+                        children: List.generate(3, (index) {
+                          return Card(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                            child: Container(
+                              padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+                              height: 40,
+//                              margin: EdgeInsets.all(20),
+                              color: Colors.white,
+                              child: Text(
+                                "ルーム$index（デフォルト）",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black,
+                              ),
+                              ),
+                            ),
+                          );
+                        }
+                        )
+                    ),
+                  ),
+
               )
             )
           ],
