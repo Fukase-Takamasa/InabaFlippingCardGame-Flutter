@@ -56,21 +56,35 @@ class _MyHomePageState extends State<MyHomePage> {
       Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Container(
-              child: Text(
-                "ひとりで遊ぶ",
-                  style: TextStyle(
-                    fontSize: 24, fontWeight: FontWeight.bold,
-                    color: Colors.white,
+            Stack(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    child: Text(
+                      "ひとりで遊ぶ",
+                      style: TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white,
+                      ),
+                    ),
                   ),
-              ),
+                ),
+              ],
             ),
-            Container(
-              padding: EdgeInsets.all(10), width: 400, height: 2, color: Colors.white,
+            Stack(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child:  Container(
+                    padding: EdgeInsets.all(10), width: 320, height: 2, color: Colors.white,
+                  ),
+                ),
+              ],
             ),
+
             Container(
               padding: EdgeInsets.all(10),
-              width: 280, height: 70,
+              width: deviceScreenSize.width * 0.7, height: 70,
               child: RaisedButton(
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -78,9 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Icon(Icons.person_outline),
                       Text(
                         "自分との戦い",
-                        style: TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black87,
                       ),
                       ),
                     ]
@@ -92,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               padding: EdgeInsets.all(10),
-              width: 280, height: 70,
+              width: deviceScreenSize.width * 0.7, height: 70,
               child: RaisedButton(
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -100,9 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Icon(Icons.desktop_mac),
                     Text(
                         "コンピュータと対戦",
-                        style: TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black87,
                         )
                     ),
                   ]
@@ -112,27 +122,39 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
               ),
             ),
-            Container(
-              child: Text(
-                "オンラインで遊ぶ",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+            Stack(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    child: Text(
+                      "オンラインで遊ぶ",
+                      style: TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-            Container(
-              padding: EdgeInsets.all(10), width: 400, height: 2, color: Colors.white,
+            Stack(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child:  Container(
+                    padding: EdgeInsets.all(10), width: 320, height: 2, color: Colors.white,
+                  ),
+                ),
+              ],
             ),
             Expanded(
               child: Container(
+                width: deviceScreenSize.width * 0.85,
                   padding: EdgeInsets.all(12),
                   child: Container(
                     decoration: BoxDecoration(
 //                      border: Border.all(color: Colors.black26, width: 2),
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10), color: Colors.white,
                     ),
                     child: ListView(
 //                      padding: EdgeInsets.all(10),
@@ -140,12 +162,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           return Card(
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                             child: Container(
-                              padding: EdgeInsets.only(left: 10, top: 10, right: 10),
-                              height: 40,
-//                              margin: EdgeInsets.all(20),
+                              padding: EdgeInsets.only(left: 10, top: 10, right: 10), height: 40,
                               color: Colors.white,
                               child: Text(
-                                "ルーム$index（デフォルト）",
+                                "ルーム${index + 1}（デフォルト）",
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.normal,
