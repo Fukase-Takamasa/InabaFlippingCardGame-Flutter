@@ -155,24 +155,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: EdgeInsets.only(top: 12, bottom: 12),
                   child: Container(
                     decoration: BoxDecoration(
-//                      border: Border.all(color: Colors.black26, width: 2),
                       borderRadius: BorderRadius.circular(10), color: Colors.white,
                     ),
                     child: ListView(
 //                      padding: EdgeInsets.all(10),
                         children: List.generate(3, (index) {
-                          return Card(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                            child: Container(
-                              padding: EdgeInsets.only(left: 10, top: 10, right: 10), height: 40,
-                              color: Colors.white,
-                              child: Text(
-                                "ルーム${index + 1}（デフォルト）",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
-                              ),
+                          return GestureDetector(
+                            //タップのメソッド
+                            onTap: () {
+                              Navigator.of(context).pushNamed("/playGameFirestoreOnline");
+                            },
+                            //UIの設定
+                            child: Card(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                              child: Container(
+                                padding: EdgeInsets.only(left: 10, top: 10, right: 10), height: 40,
+                                color: Colors.white,
+                                child: Text(
+                                  "ルーム${index + 1}（デフォルト）",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black,
+                                  ),
+                                ),
                               ),
                             ),
                           );
