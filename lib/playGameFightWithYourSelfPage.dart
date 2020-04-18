@@ -137,6 +137,7 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
                                 inabaCards[flippedCard[1]].imageName) {
                               print("//マッチした！両方のisOpened / isMatchedをtrueにする");
                               setState(() {
+                                turnCount -= 1;
                                 inabaCards[flippedCard[0]].isOpened = true;
                                 inabaCards[flippedCard[0]].isMatched = true;
                                 inabaCards[flippedCard[1]].isOpened = true;
@@ -157,6 +158,7 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
                               Future.delayed(Duration(milliseconds: 1500), () {
                                 print("//遅延処理実行開始 カードを両方とも閉じる");
                                 setState(() {
+                                  turnCount -= 1;
                                   inabaCards[flippedCard[0]].isOpened = false;
                                   inabaCards[flippedCard[1]].isOpened = false;
                                 });
