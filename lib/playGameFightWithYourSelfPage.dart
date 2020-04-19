@@ -13,7 +13,7 @@ class PlayGameFightWithYourSelfPage extends StatefulWidget {
 
 class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSelfPage> {
 
-  var turnCount = 99;
+  var turnCount = 50;
   var flipCount = 1;
   var flippedCard = [0, 0];
   var tapCardsEnabled = true;
@@ -68,10 +68,10 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Container(padding: EdgeInsets.only(bottom: 10, right: 8),
+                      Container(padding: EdgeInsets.only(right: 8),
                         child: Text("残り",
                           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black,),
-                          strutStyle: StrutStyle(fontSize: 50, height: 1.3),
+                          strutStyle: StrutStyle(fontSize: 45),
                         ),
                       ),
                       Container(
@@ -80,10 +80,10 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
                         ),
                       ),
 
-                      Container(padding: EdgeInsets.only(bottom: 10, left: 8),
+                      Container(padding: EdgeInsets.only(left: 8),
                         child: Text("ターン",
                           style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black,),
-                          strutStyle: StrutStyle(fontSize: 50, height: 1.3),
+                          strutStyle: StrutStyle(fontSize: 45),
                         ),
                       ),
                     ],
