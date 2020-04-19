@@ -44,7 +44,8 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
 
   @override
   Widget build(BuildContext context) {
-    Size deviceSize = MediaQuery.of(context).size;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    double deviceHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
         appBar: AppBar(
@@ -53,16 +54,18 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
           backgroundColor: Colors.amber[100],
         ),
         backgroundColor: Colors.amber,
-        body: Container(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Column(
+        body: Center(
+          child: Container(
+          width: deviceWidth * 0.9,
+          height: deviceHeight * 1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: deviceHeight * 0.2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(padding: EdgeInsets.only(bottom: 10, right: 8),
                         child: Text("残り",
@@ -71,15 +74,11 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  Text(turnCount.toString(),
-                    style: TextStyle(
-                      fontSize: 50, fontWeight: FontWeight.bold, color: Colors.black,
-                    ),
-                  ),
-                  Column(
-                    children: <Widget>[
+                      Text(turnCount.toString(),
+                        style: TextStyle(
+                          fontSize: 50, fontWeight: FontWeight.bold, color: Colors.black,
+                        ),
+                      ),
                       Container(padding: EdgeInsets.only(bottom: 10, left: 8),
                         child: Text("ターン",
                           style: TextStyle(
@@ -89,105 +88,108 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
                       ),
                     ],
                   ),
-                ],
-              ),
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.only(top: 30),
-            child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 6,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 0.7,
-                ),
-                itemCount: 30,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    //セルに表示する画像の設定
-                    child: ((){  //←　child:の中でif文を使うために ((){ 処理内容 }())　で囲って関数化している
-                      if (inabaCards[index].isMatched || inabaCards[index].isOpened) {
-                        return photoItem(inabaCards[index].imageName) != null ? photoItem(inabaCards[index].imageName) : Text("ImageNotFound");
-                      }else {
-                        if (index % 2 == 0) {
-                          return photoItem("CardBackImageRed") != null ? photoItem("CardBackImageRed") : Text("ImageNotFound");
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.only(top: 0),
+              child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 6,
+                    crossAxisSpacing: deviceWidth * 0.02,
+                    mainAxisSpacing: deviceHeight * 0.012,
+                    childAspectRatio: ((deviceWidth * 0.9) / (deviceHeight * 0.58)),
+                  ),
+                  itemCount: 30,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      //セルに表示する画像の設定
+                      child: ((){  //←　child:の中でif文を使うために ((){ 処理内容 }())　で囲って関数化している
+                        if (inabaCards[index].isMatched || inabaCards[index].isOpened) {
+                          return photoItem(inabaCards[index].imageName) != null ? photoItem(inabaCards[index].imageName) : Text("ImageNotFound");
                         }else {
-                          return photoItem("CardBackImageBlue") != null ? photoItem("CardBackImageBlue") : Text("ImageNotFound");
-                        }
-                      }
-                    }()),
-                    //セルタップ時のアクションの設定
-                    onTap: (){
-                      if (tapCardsEnabled) {
-                        print("カードタップ有効です");
-                        if (inabaCards[index].isOpened == false) {
-                          print("閉じていたのでめくります");
-                          if (flipCount == 1) {
-                            print("フリップが1回目 -> カードをめくる処理と、indexの記録");
-                            flipCount = 2;
-                            flippedCard[0] = index;
-                            setState(() {
-                              inabaCards[flippedCard[0]].isOpened = true;
-                            });
-                            print("カード1の状況: ${inabaCards[flippedCard[0]].imageName} ${inabaCards[flippedCard[0]].isOpened} ${inabaCards[flippedCard[0]].isMatched}");
+                          if (index % 2 == 0) {
+                            return photoItem("CardBackImageRed") != null ? photoItem("CardBackImageRed") : Text("ImageNotFound");
                           }else {
-                            print("//フリップが2回目 -> 2枚がマッチしてるかジャッジ");
-                            flippedCard[1] = index;
-                            if (inabaCards[flippedCard[0]].imageName ==
-                                inabaCards[flippedCard[1]].imageName) {
-                              print("//マッチした！両方のisOpened / isMatchedをtrueにする");
+                            return photoItem("CardBackImageRed") != null ? photoItem("CardBackImageBlue") : Text("ImageNotFound");
+                          }
+                        }
+                      }()),
+                      //セルタップ時のアクションの設定
+                      onTap: (){
+                        if (tapCardsEnabled) {
+                          print("カードタップ有効です");
+                          if (inabaCards[index].isOpened == false) {
+                            print("閉じていたのでめくります");
+                            if (flipCount == 1) {
+                              print("フリップが1回目 -> カードをめくる処理と、indexの記録");
+                              flipCount = 2;
+                              flippedCard[0] = index;
                               setState(() {
-                                turnCount -= 1;
                                 inabaCards[flippedCard[0]].isOpened = true;
-                                inabaCards[flippedCard[0]].isMatched = true;
-                                inabaCards[flippedCard[1]].isOpened = true;
-                                inabaCards[flippedCard[1]].isMatched = true;
                               });
-                              print("//カウントを1に戻し、index記録を0,0に戻す");
-                              flipCount = 1;
-                              flippedCard = [0, 0];
+                              print("カード1の状況: ${inabaCards[flippedCard[0]].imageName} ${inabaCards[flippedCard[0]].isOpened} ${inabaCards[flippedCard[0]].isMatched}");
                             }else {
-                              print("//マッチしなかったorz");
-                              print("//ここで一旦 isOpened: trueにする（ユーザーにカードを見せる為)");
-                              print("//また、2秒後にカードを閉じるまでの間にカードを触れなくする");
-                              tapCardsEnabled = false;
-                              setState(() {
-                                inabaCards[flippedCard[1]].isOpened = true;
-                              });
-                              print("//遅延処理予約　1.5秒後に実行される");
-                              Future.delayed(Duration(milliseconds: 1500), () {
-                                print("//遅延処理実行開始 カードを両方とも閉じる");
+                              print("//フリップが2回目 -> 2枚がマッチしてるかジャッジ");
+                              flippedCard[1] = index;
+                              if (inabaCards[flippedCard[0]].imageName ==
+                                  inabaCards[flippedCard[1]].imageName) {
+                                print("//マッチした！両方のisOpened / isMatchedをtrueにする");
                                 setState(() {
                                   turnCount -= 1;
-                                  inabaCards[flippedCard[0]].isOpened = false;
-                                  inabaCards[flippedCard[1]].isOpened = false;
+                                  inabaCards[flippedCard[0]].isOpened = true;
+                                  inabaCards[flippedCard[0]].isMatched = true;
+                                  inabaCards[flippedCard[1]].isOpened = true;
+                                  inabaCards[flippedCard[1]].isMatched = true;
                                 });
-                                print("//最後にカウントとindexとカードタップ可否を元に戻す");
+                                print("//カウントを1に戻し、index記録を0,0に戻す");
                                 flipCount = 1;
                                 flippedCard = [0, 0];
-                                tapCardsEnabled = true;
-                              });
+                              }else {
+                                print("//マッチしなかったorz");
+                                print("//ここで一旦 isOpened: trueにする（ユーザーにカードを見せる為)");
+                                print("//また、2秒後にカードを閉じるまでの間にカードを触れなくする");
+                                tapCardsEnabled = false;
+                                setState(() {
+                                  inabaCards[flippedCard[1]].isOpened = true;
+                                });
+                                print("//遅延処理予約　1.5秒後に実行される");
+                                Future.delayed(Duration(milliseconds: 1500), () {
+                                  print("//遅延処理実行開始 カードを両方とも閉じる");
+                                  setState(() {
+                                    turnCount -= 1;
+                                    inabaCards[flippedCard[0]].isOpened = false;
+                                    inabaCards[flippedCard[1]].isOpened = false;
+                                  });
+                                  print("//最後にカウントとindexとカードタップ可否を元に戻す");
+                                  flipCount = 1;
+                                  flippedCard = [0, 0];
+                                  tapCardsEnabled = true;
+                                });
+                              }
+                              print("カード1の状況: ${inabaCards[flippedCard[0]].imageName} ${inabaCards[flippedCard[0]].isOpened} ${inabaCards[flippedCard[0]].isMatched}");
+                              print("カード2の状況: ${inabaCards[flippedCard[1]].imageName} ${inabaCards[flippedCard[1]].isOpened} ${inabaCards[flippedCard[1]].isMatched}");
                             }
-                            print("カード1の状況: ${inabaCards[flippedCard[0]].imageName} ${inabaCards[flippedCard[0]].isOpened} ${inabaCards[flippedCard[0]].isMatched}");
-                            print("カード2の状況: ${inabaCards[flippedCard[1]].imageName} ${inabaCards[flippedCard[1]].isOpened} ${inabaCards[flippedCard[1]].isMatched}");
+                          }else {
+                            print("開いているカードは触れません");
                           }
+                          print("現在のindex: $index");
+                          print("flippedCard: $flippedCard");
                         }else {
-                          print("開いているカードは触れません");
+                          print("カートタップが無効です");
                         }
-                        print("現在のindex: $index");
-                        print("flippedCard: $flippedCard");
-                      }else {
-                        print("カートタップが無効です");
-                      }
-                    },
-                  );
-                }
+                      },
+                    );
+                  }
+              )
             )
-    )
-    )
-            ],
-          )
-    )
+            ),
+            Container(
+              height: deviceHeight * 0.2,
+            )
+              ],
+            )
+      )
+    ),
     );
 }
 
@@ -198,7 +200,9 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
     return Container(
         child: ClipRRect(
             borderRadius: BorderRadius.circular(4.0),
-            child: Image.asset(assetsImage, fit: BoxFit.cover)
+            child: Image.asset(
+                assetsImage,
+                fit: (image == "CardBackImageRed") || (image == "CardBackImageBlue") ? BoxFit.fill : BoxFit.contain)
         )
     );
   }
