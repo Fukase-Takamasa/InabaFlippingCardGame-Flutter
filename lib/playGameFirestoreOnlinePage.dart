@@ -15,7 +15,8 @@ class _PlayGameFirestoreOnlinePageState extends State<PlayGameFirestoreOnlinePag
 
   @override
   Widget build(BuildContext context) {
-    Size deviceSize = MediaQuery.of(context).size;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    double deviceHeight = MediaQuery.of(context).size.height;
 
     var flipCount = 1;
     var flippedCard = [0, 0];
@@ -37,35 +38,36 @@ class _PlayGameFirestoreOnlinePageState extends State<PlayGameFirestoreOnlinePag
               if (!snapshot.hasData) {
                 return const Text('Loading...');
               }
-              return GridView.builder(
+              return Center(
+                child: Container(
+                  width: deviceWidth * 0.9,
+                  height: deviceHeight * 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        height: deviceHeight * 0.18, //スペーサー
+                      ),
+                      Expanded(
+                        child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 6,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 0.7,
+                    crossAxisSpacing: deviceWidth * 0.024,
+                    mainAxisSpacing: deviceHeight * 0.01,
+                    childAspectRatio: ((deviceWidth * 0.9) / (deviceHeight * 0.67)),
                   ),
                   itemCount: 30,
-                  padding: EdgeInsets.only(top: deviceSize.height * 0.18,
-                      bottom: deviceSize.height * 0.2,
-                      left: deviceSize.width * 0.04,
-                      right: deviceSize.width * 0.04),
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       //セルに表示する画像の設定
                       child: ((){  //←　child:の中でif文を使うために ((){ 処理内容 }())　で囲って関数化している
                         if (snapshot.data.documents[index]["isMatched"] || snapshot.data.documents[index]["isOpened"]) {
-                          return photoItem(snapshot.data.documents[index]["imageName"]) != null ?
-                          photoItem(snapshot.data.documents[index]["imageName"])
-                              : Text("Loading...");
+                          return photoItem(snapshot.data.documents[index]["imageName"]) != null ? photoItem(snapshot.data.documents[index]["imageName"]) : Text("Loading...");
                         }else {
                           if (index % 2 == 0) {
-                            return photoItem("CardBackImageRed") != null ?
-                            photoItem("CardBackImageRed")
-                                : Text("Loading...");
+                            return photoItem("CardBackImageRed") != null ? photoItem("CardBackImageRed") : Text("Loading...");
                           }else {
-                            return photoItem("CardBackImageBlue") != null ?
-                            photoItem("CardBackImageBlue")
-                                : Text("Loading...");
+                            return photoItem("CardBackImageBlue") != null ? photoItem("CardBackImageBlue") : Text("Loading...");
                           }
                         }
                       }()),
@@ -164,6 +166,14 @@ class _PlayGameFirestoreOnlinePageState extends State<PlayGameFirestoreOnlinePag
                       },
                     );
                   }
+              )
+                      ),
+                      Container(
+                        height: deviceHeight * 0.18, //スペーサー
+                      )
+                    ],
+                  ),
+                )
               );
             }
         )
@@ -174,10 +184,14 @@ class _PlayGameFirestoreOnlinePageState extends State<PlayGameFirestoreOnlinePag
   //指定の画像名でwidgetを生成し、returnする関数  →　photoItem("ina1")の様に使う
   Widget photoItem(String image) {
     var assetsImage = "images/" + image + ".jpg";
-    return Container(
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(4.0),
-            child: Image.asset(assetsImage, fit: BoxFit.cover)
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(4.0),
+        child: Container(
+            color: Colors.white,
+            child: Image.asset(
+                assetsImage,
+                fit: (image == "CardBackImageRed") || (image == "CardBackImageBlue") ? BoxFit.fill : BoxFit.contain
+            )
         )
     );
   }

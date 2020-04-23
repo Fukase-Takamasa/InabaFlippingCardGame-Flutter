@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       home: MyHomePage(title: 'ロビー«Flutter»'),
       routes: {
-        '/playGameFirestoreOnline': (BuildContext context) =>  PlayGameFirestoreOnlinePage(title: 'FirestoreOnline'),
+        '/playGameFirestoreOnline': (BuildContext context) =>  PlayGameFirestoreOnlinePage(title: 'ルーム1(デフォ)'),
         '/PlayGameFightWithYourSelf': (BuildContext context) => PlayGameFightWithYourSelfPage(title: '自分との戦い部屋'),
       },
     );

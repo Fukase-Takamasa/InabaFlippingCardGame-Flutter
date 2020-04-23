@@ -62,7 +62,7 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  height: deviceHeight * 0.2,
+                  height: deviceHeight * 0.18,
                   alignment: Alignment.center,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +75,7 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
                         ),
                       ),
                       Container(
-                        child: Text(turnCount.toString(), //　←　99など
+                        child: Text(turnCount.toString(),
                           style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: Colors.black,),
                         ),
                       ),
@@ -97,7 +97,7 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
                     crossAxisCount: 6,
                     crossAxisSpacing: deviceWidth * 0.024,
                     mainAxisSpacing: deviceHeight * 0.01,
-                    childAspectRatio: ((deviceWidth * 0.9) / (deviceHeight * 0.58)),
+                    childAspectRatio: ((deviceWidth * 0.9) / (deviceHeight * 0.67)),
                   ),
                   itemCount: 30,
                   itemBuilder: (context, index) {
@@ -184,7 +184,7 @@ class _PlayGameFightWithYourSelfPageState extends State<PlayGameFightWithYourSel
             )
             ),
             Container(
-              height: deviceHeight * 0.2,
+              height: deviceHeight * 0.18, //スペーサー
             )
               ],
             )
