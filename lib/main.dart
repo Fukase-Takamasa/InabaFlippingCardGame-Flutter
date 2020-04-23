@@ -185,9 +185,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                     color: Colors.white,
                                     child: ((){
 //                                      return Text(document["roomName"]) != null ? Text(document["roomName"]) : Text("Loading...");
-
-                                      return roomItem(document["roomName"], "0", "参加する") != null ?
-                                      roomItem(document["roomName"], "0", "参加する") : Text("Loading...");
+                                      var playerCount = (document.data.length - 3);
+                                      var state = playerCount < 2 ? "参加する" : "満室";
+                                      return roomItem(document["roomName"], playerCount.toString(), state) != null ?
+                                      roomItem(document["roomName"], playerCount.toString(), state) : Text("Loading...");
 
                                     }()),
                                   ),
@@ -222,7 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         Expanded(
-          child: Text("")
+          child: Text("") // ←　上のmaxWidth: double.infinityと組み合わせて　いい感じのSpacerにしてる
         ),
         Text("$playerCount/2　",
           style: TextStyle(
