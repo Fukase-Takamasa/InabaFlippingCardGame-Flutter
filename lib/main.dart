@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'playGameFirestoreOnlinePage.dart';
@@ -169,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         child: ListView(
 //                      padding: EdgeInsets.all(10),
-                            children: List.generate(3, (index) {
+                            children: snapshot.data.documents.map((DocumentSnapshot document) {
                               return GestureDetector(
                                 //タップのメソッド
                                 onTap: () {
@@ -179,21 +180,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                 child: Card(
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                                   child: Container(
-                                    padding: EdgeInsets.only(left: 10, top: 10, right: 10), height: 40,
+                                    height: 40,
+                                    padding: EdgeInsets.only(left: 10, top: 0, right: 10),
                                     color: Colors.white,
-                                    child: Text(
-                                      "ルーム${index + 1}（デフォルト）",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.normal,
-                                        color: Colors.black,
-                                      ),
-                                    ),
+                                    child: ((){
+//                                      return Text(document["roomName"]) != null ? Text(document["roomName"]) : Text("Loading...");
+
+                                      return roomItem(document["roomName"], "0", "参加する") != null ?
+                                      roomItem(document["roomName"], "0", "参加する") : Text("Loading...");
+
+                                    }()),
                                   ),
                                 ),
                               );
-                            }
-                            )
+                            }).toList(),
                         ),
                       ),
 
@@ -204,6 +204,45 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
       )
+    );
+  }
+
+
+  Widget roomItem(String roomName, String playerCount, String state) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: double.infinity),
+          child: Text(roomName,
+            style: TextStyle(
+            fontSize: 20, fontWeight: FontWeight.normal,
+            color: Colors.black,)
+          ),
+        ),
+        Expanded(
+          child: Text("")
+        ),
+        Text("$playerCount/2　",
+          style: TextStyle(
+          fontSize: 20, fontWeight: FontWeight.normal,
+          color: Colors.black,)
+        ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Container(
+            width: 90, height: 32,
+            color: (state != "満室") ? Colors.lightBlueAccent : Colors.orangeAccent,
+            child: Text(state,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+              fontSize: 16, fontWeight: FontWeight.bold,
+              color: Colors.white,)
+            ),
+          )
+        ),
+      ],
     );
   }
 }
